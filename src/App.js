@@ -3,7 +3,8 @@ import React from 'react';
 import { auth } from './firebase/init';
 import { createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
  } from 'firebase/auth';
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
 
   function login() {
     signInWithEmailAndPassword(auth, 'email@email.com', 'test123')
-      .then((user) => {
+      .then(({ user }) => {
         console.log(user);
       })
       .catch((error) => {
@@ -42,7 +43,7 @@ function App() {
   }
 
   function logout() {
-    auth.signOut()
+    signOut(auth)
       .then(() => {
         console.log('User signed out');
       })
